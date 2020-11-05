@@ -10,9 +10,12 @@ const transactionsRouter = Router();
 
 transactionsRouter.get('/', async (request, response) => {
   const transactionsRepository = getCustomRepository(TransactionsRepository);
-  const transactions = await transactionsRepository.find();
+  const transactions = await transactionsRepository.find({
+    relations: ['category'],
+    select: ['id', 'title', 'value', 'type', 'created_at', 'updated_at'],
+  });
 
-  return response.json(transactions);
+  return response.json({ transactions });
 });
 
 transactionsRouter.post('/', async (request, response) => {

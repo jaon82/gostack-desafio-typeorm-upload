@@ -40,7 +40,7 @@ transactionsRouter.delete('/:id', async (request, response) => {
   const transactionsRepository = getCustomRepository(TransactionsRepository);
   await transactionsRepository.delete({ id });
 
-  return response.send();
+  return response.status(204).send();
 });
 
 transactionsRouter.post('/import', async (request, response) => {

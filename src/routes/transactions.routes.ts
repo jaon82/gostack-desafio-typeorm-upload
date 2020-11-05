@@ -14,8 +14,9 @@ transactionsRouter.get('/', async (request, response) => {
     relations: ['category'],
     select: ['id', 'title', 'value', 'type', 'created_at', 'updated_at'],
   });
+  const balance = await transactionsRepository.getBalance();
 
-  return response.json({ transactions });
+  return response.json({ transactions, balance });
 });
 
 transactionsRouter.post('/', async (request, response) => {
